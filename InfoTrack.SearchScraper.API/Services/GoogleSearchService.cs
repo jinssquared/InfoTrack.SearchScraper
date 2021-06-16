@@ -2,7 +2,12 @@
 using InfoTrack.SearchScraper.API.Interfaces;
 using InfoTrack.SearchScraper.API.Representations;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace InfoTrack.SearchScraper.API.Services
@@ -28,15 +33,15 @@ namespace InfoTrack.SearchScraper.API.Services
             _htmlParserService = htmlParserService;
         }
 
-        public async Task<ICollection<int>> Search(SearchRequestRepresentation searchRequestRepresentation)
+        public async Task<ICollection<int>> Search(string searchTerm, string urlToMatch)
         {
-            var searchRequest = _googleSearchConverter.Convert(searchRequestRepresentation);
+            var searchRequest = _googleSearchConverter.Convert(searchTerm);
 
-            var searchUrl = string.Format($"{_configuration["GoogleBaseUrl"]}/{_configuration["GoogleQueryString"]}", searchRequest.SearchTerm);
+            var searchUrl = string.Format($"{_configuration["GoogleBaseUrl"]}/{_configuration["GoogleQueryString"]}", searchTerm);
 
-            var document = await _htmlRetrieverService.GetHtmlDocumentAsync(searchUrl, new Url(_configuration["GoogleBaseUrl"]), _configuration["GoogleCookieConsentCookie"]);
-          
-            return _htmlParserService.Parse(document, _configuration["GoogleDocParserValue"], searchRequest.UrlToMatch);
+            var document = await _htmlRetrieverService.GetHtmlDocumentAsync(searchUrl, new Uri(_configuration["GoogleBaseUrl"]), new Cookie("CONSENT", _configuration["GoogleCookieConsentCookie"]));
+           
+            return _htmlParserService.Parse(document, _configuration["GoogleDocParserValue"], urlToMatch);
         }
     }
 }

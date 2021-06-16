@@ -1,11 +1,11 @@
-﻿using AngleSharp;
-using AngleSharp.Dom;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace InfoTrack.SearchScraper.API.Interfaces
 {
     public interface IHtmlRetrieverService
     {
-        Task<IDocument> GetHtmlDocumentAsync(string baseUrl, Url baseAddress, string cookie);
+        Task<string> GetHtmlDocumentAsync(string baseUrl, Uri baseAddress, Cookie cookie);
     }
 }

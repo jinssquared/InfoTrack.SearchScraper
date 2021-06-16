@@ -6,6 +6,6 @@ namespace InfoTrack.SearchScraper.API.Interfaces
 {
     public interface IGoogleSearchService 
     {
-        Task<ICollection<int>> Search(SearchRequestRepresentation searchRequestRepresentation);
+        Task<ICollection<int>> Search(string searchTerm, string urlToMatch);
     }
 }

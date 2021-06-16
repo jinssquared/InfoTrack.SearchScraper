@@ -6,13 +6,9 @@ namespace InfoTrack.SearchScraper.API.Converters
 {
     public class GoogleSearchConverter : IGoogleSearchConverter
     {
-        public SearchRequest Convert(SearchRequestRepresentation representation)
+        public string Convert(string searchTerm)
         {
-            return new SearchRequest
-            {
-                SearchTerm = representation.SearchTerm.Replace(' ', '+'),
-                UrlToMatch = representation.UrlToMatch
-            };
+            return searchTerm.Replace(' ', '+');
         }
 
     }

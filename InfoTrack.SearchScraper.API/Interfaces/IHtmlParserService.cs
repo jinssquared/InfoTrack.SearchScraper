@@ -5,6 +5,6 @@ namespace InfoTrack.SearchScraper.API.Interfaces
 {
     public interface IHtmlParserService
     {
-        ICollection<int> Parse(IDocument document, string selectorNode, string urlToMatch); 
+        ICollection<int> Parse(string document, string selectorNode, string urlToMatch); 
     }
 }

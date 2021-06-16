@@ -25,15 +25,10 @@ namespace InfoTrack.SearchScraper.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [Route("SearchGoogle/{searchTerm}/Match/{urlToMatch}", Name = "SearchGoogle")]
+        public async Task<IActionResult> SearchGoogle(string searchTerm, string urlToMatch)
         {
-            var request = new SearchRequestRepresentation()
-            {
-                SearchTerm = "land registry searches",
-                UrlToMatch = "www.infotrack.co.uk"
-            };
-
-            return Ok(await _googleSearchService.Search(request));
+            return Ok(await _googleSearchService.Search(searchTerm, urlToMatch));
         }
     }
 }

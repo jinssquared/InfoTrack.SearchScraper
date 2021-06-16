@@ -19,11 +19,9 @@ namespace InfoTrack.SearchScraper.Tests.Converters
         [TestCase("this and that", "this+and+that")]
         public void Converts_spaces_to_pluses(string searchTerm, string expectedResult)
         {
-            var searchRequestRepresentation = new SearchRequestRepresentation() { SearchTerm = searchTerm, UrlToMatch = It.IsAny<string>() };
+            var result = _converter.Convert(searchTerm);
 
-            var result = _converter.Convert(searchRequestRepresentation);
-
-            Assert.AreEqual(expectedResult, result.SearchTerm);
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }
