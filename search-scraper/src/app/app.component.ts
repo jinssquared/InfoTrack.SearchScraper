@@ -17,7 +17,15 @@ export class AppComponent {
   searchResult: number[] = [];
 
   searchGoogle() {
-    this.appService.searchGoogle(this.searchTerm.value, this.urlToMatch.value).subscribe(x => this.searchResult = x);
+    this.appService
+      .searchGoogle(this.searchTerm.value, this.urlToMatch.value)
+      .subscribe(x => 
+        {
+          if(x && x.length > 0)
+            this.searchResult = x;
+          else
+            this.searchResult = [0];
+        });
   }
 
   

@@ -1,17 +1,19 @@
-<h1>{{title}}</h1>
+<div class="g">
+  <h1>{{title}}</h1>
 
-<div>
-    <span>
-      <label>Search Term</label>
-      <input type="text" placeholder="Search term"
-        formControlName="searchTerm" [formControl]="searchTerm">
-      <label>Url To Match</label>
-      <input type="text" placeholder="Url"
-        formControlName="urlToMatch" [formControl]="urlToMatch">
-    </span>
-    <button (click)="searchGoogle()">Search Google</button>
+  <div>
+      <span>
+        <label>Search Term</label>
+        <input type="text" placeholder="Search term"
+          formControlName="searchTerm" [formControl]="searchTerm">
+        <label>Url To Match</label>
+        <input type="text" placeholder="Url"
+          formControlName="urlToMatch" [formControl]="urlToMatch">
+      </span>
+      <button type="submit" (click)="searchGoogle()">Search Google</button>
+  </div>
+  <div *ngIf="searchResult.length > 0">Matches: {{searchResult}}</div>
 </div>
-<div>{{searchResult}}</div>
 
 
 
